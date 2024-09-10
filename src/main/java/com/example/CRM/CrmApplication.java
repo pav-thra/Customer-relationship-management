@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CrmApplication {
 
 	public static void main(String[] args) {
+		System.out.println("Hello world");
 		SpringApplication.run(CrmApplication.class, args);
 	}
-
 }
