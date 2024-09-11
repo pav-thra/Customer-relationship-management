@@ -25,13 +25,22 @@ public class ContactController
         return contactRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    private ResponseEntity<Optional<Contacts>> getContactById(@PathVariable Integer id)
+    {
+        Contacts contact = contactRepository.findById(id)
+                .orElseThrow( () -> new NoSuchElementException("Contact not found"));
+
+        return ResponseEntity.ok(Optional.ofNullable(contact));
+    }
+
     @PostMapping
     private Contacts createContact(@RequestBody Contacts contact)
     {
         return contactRepository.save(contact);
     }
 
-    @PutMapping("/{id")
+    @PutMapping("/{id}")
     //@PathVariable is an annotation provided by Spring that indicates a method parameter should be bound to a URI template variable.
     // This annotation is used to retrieve data from the URL path in a Spring-based RESTful API.
 
@@ -50,7 +59,7 @@ public class ContactController
         return ResponseEntity.ok(updatedContacts);
     }
 
-    @DeleteMapping("/{id")
+    @DeleteMapping("/{id}")
     /* Map<String, Boolean> response = new HashMap<>();
     response.put("deleted", Boolean.TRUE);
     return ResponseEntity.ok(response);
